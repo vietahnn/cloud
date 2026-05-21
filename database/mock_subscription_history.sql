@@ -1,0 +1,3 @@
+-- No direct mock INSERTs found for subscription_history in mock files.
+-- Placeholder example:
+-- INSERT INTO subscription_history (tenant_id, created_at, starts_on, expires_on, status) VALUES (100, NOW(), NOW(), NOW() + INTERVAL 30 DAY, 'active');

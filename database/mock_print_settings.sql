@@ -1,0 +1,3 @@
+-- No mock INSERTs found for print_settings in existing mock files.
+-- Add INSERTs here if needed, e.g.:
+-- INSERT INTO print_settings (tenant_id, printer_name, settings) VALUES (100, 'Printer A', '{}');

@@ -1,0 +1,3 @@
+-- No mock INSERTs found for inventory_items in mock files.
+-- Placeholder example:
+-- INSERT INTO inventory_items (id, name, quantity, tenant_id) VALUES (1, 'Gạo', 100, 100);

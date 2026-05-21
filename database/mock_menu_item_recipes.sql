@@ -1,0 +1,3 @@
+-- No mock INSERTs found for menu_item_recipes in mock files.
+-- Placeholder example:
+-- INSERT INTO menu_item_recipes (item_id, ingredient_id, quantity, tenant_id) VALUES (101, 1, 100, 100);
