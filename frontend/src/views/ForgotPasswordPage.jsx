@@ -1,15 +1,13 @@
 import React from "react";
-import Logo from "../assets/logo.svg";
+import BrandText from "../components/BrandText";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { forgotPassword } from "../controllers/auth.controller";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../contexts/ThemeContext";
 
 export default function ForgotPasswordPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {theme} = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,9 +51,7 @@ export default function ForgotPasswordPage() {
             <div className="text-xl font-medium">
               {t("reset_password.title")}
             </div>
-            <div>
-              <img src={Logo} className="h-16" />
-            </div>
+            <BrandText className="text-restro-green-dark text-lg" />
           </div>
 
           <form className="mt-6" onSubmit={handleSubmit}>

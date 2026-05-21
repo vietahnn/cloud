@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Logo from "../assets/logo.svg";
-import LogoDark from "../assets/LogoDark.svg"
+import BrandText from "../components/BrandText";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { SCOPES } from "../config/scopes";
@@ -95,9 +94,7 @@ export default function RegistrationPage() {
           <div className='text-xl font-medium dark:text-green-100 text-restro-green-dark'>
             {t("register.title")}
           </div>
-          <div>
-            <img src={theme === "black" ? LogoDark : Logo} className="h-16" />
-          </div>
+          <BrandText className={theme === "black" ? "text-white text-lg" : "text-restro-green-dark text-lg"} />
         </div>
 
         <form className="mt-6" onSubmit={handleSubmit}>

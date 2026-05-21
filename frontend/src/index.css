@@ -1,69 +1,87 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700;1,900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --background: #fff;
-    --foreground: #000;
-    --restro-green-light: #ECF1EB;
-    --restro-green: #70B56A;
-    --restro-green-10: #70b56a18;
-    --restro-border-green: #DCE7DB;
-    --restro-text: #6b7280;
-    --restro-gray: #f3f4f6;
-    --restro-ring: #000;
-    --restro-bg-gray: #f3f4f6;
-    --restro-card-bg: #f3f4f6;
-    --restro-button-hover: #e5e6e8;
-    --restro-green-button-hover: #629c5d;
-    --restro-red: #f87171;
-    --restro-red-hover: #fee2e2;
-    --restro-yellow: #f4d6a1;
-    --restro-bg-yellow: #a23ca6;
-    --restro-yellow-hover: #e1920a;
-    --restro-checkbox: #e5e6e8;
+    --background: #F4F7FB;
+    --foreground: #0F172A;
+    --restro-green-light: #F4F7FB;
+    --restro-green: #3B82F6;
+    --restro-green-10: #3B82F61A;
+    --restro-border-green: #E3E8F0;
+    --restro-text: #5F6C84;
+    --restro-gray: #F1F4F8;
+    --restro-ring: #3B82F6;
+    --restro-bg-gray: #F7F9FC;
+    --restro-card-bg: #FFFFFF;
+    --restro-button-hover: #E9EEF7;
+    --restro-green-button-hover: #2563EB;
+    --restro-red: #EF4444;
+    --restro-red-hover: #FEE2E2;
+    --restro-yellow: #F59E0B;
+    --restro-bg-yellow: #FEF3C7;
+    --restro-yellow-hover: #D97706;
+    --restro-checkbox: #E2E8F0;
 
-    --restro-green-dark: #243922;
-    --restro-border-green-light: #dce7db;
-    --restro-superadmin-widget-bg: #bedc74;
-    --restro-superadmin-text-green: #387f39;
-    --restro-superadmin-text-black: #444444;
+    --restro-green-dark: #0F172A;
+    --restro-border-green-light: #E7ECF4;
+    --restro-superadmin-widget-bg: #E8F1FF;
+    --restro-superadmin-text-green: #1D4ED8;
+    --restro-superadmin-text-black: #0F172A;
 
-    --scroll-wrapper-start: rgba(255, 255, 255, 1);
-    --scroll-wrapper-end: rgba(255, 255, 255, 0);
+    --restro-sidebar-bg: #0F1B2D;
+    --restro-sidebar-active: #1C2E49;
+    --restro-sidebar-text: #E6EEF8;
+    --restro-sidebar-muted: #9FB2C8;
+    --restro-surface: #FFFFFF;
+    --restro-surface-muted: #F1F4F8;
+    --restro-app-gradient: radial-gradient(1200px 600px at 20% -10%, rgba(59, 130, 246, 0.10) 0%, transparent 60%),
+        radial-gradient(900px 500px at 85% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+
+    --scroll-wrapper-start: rgba(244, 247, 251, 1);
+    --scroll-wrapper-end: rgba(244, 247, 251, 0);
 }
 
 .dark {
-    --background: #000;
-    --foreground: #fff;
-    --restro-green-light: #121212;
-    --restro-green: #2e7746;
-    --restro-green-10: #2e774625;
-    --restro-border-green: #333333;
-    --restro-text: #F0F0F0;
-    --restro-gray: #232323;
-    --restro-ring: #888;
-    --restro-bg-gray: #242526;
-    --restro-card-bg: #121212;
-    --restro-button-hover: #353535;
-    --restro-green-button-hover: #205331;
-    --restro-red: #dc2626;
-    --restro-red-hover: #fecaca;
-    --restro-yellow: #f0a523;
-    --restro-bg-yellow: #fef9c3;
-    --restro-yellow-hover: #dbb743;
-    --restro-checkbox: #242526;
+    --background: #0B1220;
+    --foreground: #E6EEF8;
+    --restro-green-light: #0F1B2D;
+    --restro-green: #60A5FA;
+    --restro-green-10: #60A5FA1A;
+    --restro-border-green: #1F2A44;
+    --restro-text: #B9C5D9;
+    --restro-gray: #111A2B;
+    --restro-ring: #60A5FA;
+    --restro-bg-gray: #0E1626;
+    --restro-card-bg: #111A2B;
+    --restro-button-hover: #1C2740;
+    --restro-green-button-hover: #3B82F6;
+    --restro-red: #F87171;
+    --restro-red-hover: #7F1D1D;
+    --restro-yellow: #FBBF24;
+    --restro-bg-yellow: #3B2F1E;
+    --restro-yellow-hover: #F59E0B;
+    --restro-checkbox: #1E293B;
 
-    --restro-green-dark: #333333;
-    --restro-border-green-light: #222222;
-    --restro-superadmin-widget-bg: #bedc74;
-    --restro-superadmin-text-green: #387f39;
-    --restro-superadmin-text-black: #444444;
+    --restro-green-dark: #E6EEF8;
+    --restro-border-green-light: #1C2740;
+    --restro-superadmin-widget-bg: #15233B;
+    --restro-superadmin-text-green: #93C5FD;
+    --restro-superadmin-text-black: #E6EEF8;
 
-    --scroll-wrapper-start: rgba(0, 0, 0, 1);
-    --scroll-wrapper-end: rgba(0, 0, 0, 0);
+    --restro-sidebar-bg: #0C1424;
+    --restro-sidebar-active: #16263F;
+    --restro-sidebar-text: #E6EEF8;
+    --restro-sidebar-muted: #9FB2C8;
+    --restro-surface: #111A2B;
+    --restro-surface-muted: #0F172A;
+    --restro-app-gradient: radial-gradient(1200px 600px at 20% -10%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+        radial-gradient(900px 500px at 85% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 60%);
+
+    --scroll-wrapper-start: rgba(11, 18, 32, 1);
+    --scroll-wrapper-end: rgba(11, 18, 32, 0);
 }
 
 /* Light Mode (default styles) */
@@ -113,16 +131,28 @@
 
 @layer base {
     html {
-        font-family: 'Nunito', sans-serif;
+        font-family: 'Sora', sans-serif;
         font-optical-sizing: auto;
     }
 }
 
+body {
+    background: var(--background);
+    color: var(--foreground);
+    background-image: var(--restro-app-gradient);
+    background-attachment: fixed;
+}
+
+.brand-text {
+    font-family: 'Pacifico', cursive;
+    letter-spacing: 0.5px;
+}
+
 .outline-text {
     text-shadow:
-        1px 1px 0 #000,
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+    1px 1px 0 var(--foreground),
+    -1px -1px 0 var(--foreground),
+    1px -1px 0 var(--foreground),
+    -1px 1px 0 var(--foreground),
+    1px 1px 0 var(--foreground);
 }

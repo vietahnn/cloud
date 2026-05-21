@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { clsx } from "clsx";
-import Logo from "../assets/logo.svg";
-import LogoDark from "../assets/LogoDark.svg"
+import BrandText from "../components/BrandText";
 import { toast } from "react-hot-toast";
 import { signIn } from "../controllers/auth.controller";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,11 +11,9 @@ import {
 } from "../helpers/UserDetails";
 import { SCOPES } from "../config/scopes";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../contexts/ThemeContext";
 
 export default function LoginPage() {
   const { t } = useTranslation();
-  const {theme} = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -139,9 +136,7 @@ export default function LoginPage() {
             <div className='text-xl font-medium'>
               {t("login.title")}
             </div>
-            <div>
-              <img src={theme === "black" ? LogoDark : Logo} className="h-16" />
-            </div>
+            <BrandText className="text-restro-green-dark dark:text-white text-lg" />
           </div>
 
           <form className="mt-6" onSubmit={handleSubmit}>

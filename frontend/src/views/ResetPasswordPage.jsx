@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/logo.svg";
+import BrandText from "../components/BrandText";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { resetPassword } from "../controllers/auth.controller";
@@ -58,9 +58,7 @@ export default function ResetPasswordPage() {
             <div className="text-restro-green-dark text-xl font-medium">
               {t("reset_password.title")}
             </div>
-            <div>
-              <img src={Logo} className="h-16" />
-            </div>
+            <BrandText className="text-restro-green-dark text-lg" />
           </div>
 
           <form className="mt-6" onSubmit={handleSubmit}>

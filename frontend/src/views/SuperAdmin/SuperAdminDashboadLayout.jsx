@@ -10,7 +10,7 @@ export default function SuperAdminDashboadLayout() {
   return (
    <div className='flex'>
       <SuperAdminNavbar />
-      <div className={isNavbarCollapsed?`w-full ml-[5.5rem] overflow-y-auto h-screen`:`w-full ml-[5.5rem] md:ml-72 overflow-y-auto h-screen`}>
+      <div className={isNavbarCollapsed?`w-full ml-[5.5rem] overflow-y-auto h-screen bg-restro-bg-gray`:`w-full ml-[5.5rem] md:ml-72 overflow-y-auto h-screen bg-restro-bg-gray`}>
         <SuperAdminAppBar />
         <Outlet />
       </div>

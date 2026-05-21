@@ -1,0 +1,26 @@
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Node dependencies
+**/node_modules/
+
+# Build outputs and caches
+**/dist/
+**/dist-ssr/
+**/coverage/
+**/.vite/
+**/.cache/
+
+# Logs and temp files
+**/*.log
+**/tmp/
+**/log/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

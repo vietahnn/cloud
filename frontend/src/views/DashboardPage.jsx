@@ -6,13 +6,10 @@ import { Link } from "react-router-dom";
 import { useDashboard } from '../controllers/dashboard.controller';
 import { CURRENCIES } from "../config/currencies.config";
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../contexts/ThemeContext';
-import clsx from 'clsx';
 
 export default function DashboardPage() {
   const { t } = useTranslation();
   const { data, error, isLoading } = useDashboard();
-  const { theme } = useTheme();
 
   if(isLoading) {
     return <Page>
@@ -34,24 +31,22 @@ export default function DashboardPage() {
   const currency = CURRENCIES.find((c)=>c.cc==currencyCode);
 
   return (
-    <Page>
-      <h3 className="text-2xl">{t('dashboard.title')}</h3>
+    <Page className="px-6 py-5">
+      <h3 className="text-2xl font-semibold">{t('dashboard.title')}</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 
         {/* reservation */}
-        <div className="border rounded-3xl h-96 overflow-y-auto border-restro-border-green">
-          <div className= "py-5 px-6 border-b-0 backdrop-blur rounded-t-3xl sticky top-0">
+        <div className="border rounded-3xl h-96 overflow-y-auto border-restro-border-green bg-restro-surface shadow-sm">
+          <div className="py-5 px-6 border-b-0 bg-restro-surface rounded-t-3xl sticky top-0">
             <Link to="/dashboard/reservation" className='font-bold'>{t('dashboard.reservations')}</Link>
           </div>
 
-          {reservations?.length == 0 && <div className='w-full px-8 2xl:px-10 pt-2'>
-            <img
-              src="/assets/illustrations/reservation-not-found.webp"
-              alt="no-reservation"
-              className='w-7/12 mx-auto'
-            />
-            <p className='mt-2 text-center text-gray-500 font-semibold'>Oh snap! 🍽️</p>
+          {reservations?.length == 0 && <div className='w-full px-8 2xl:px-10 pt-10'>
+            <div className="w-12 h-12 rounded-full bg-restro-green-10 text-restro-green flex items-center justify-center mx-auto">
+              <IconArmchair2 stroke={iconStroke} />
+            </div>
+            <p className='mt-3 text-center text-gray-500 font-semibold'>Oh snap! 🍽️</p>
             <p className='text-center text-gray-500'>{t('dashboard.no_reservations')}</p>
           </div>}
 
@@ -101,8 +96,8 @@ export default function DashboardPage() {
         {/* reservation */}
 
         {/* popular items */}
-        <div className="border rounded-3xl h-96 overflow-y-auto border-restro-border-green">
-          <div className="py-5 px-6 border-b-0 backdrop-blur rounded-t-3xl sticky top-0">
+        <div className="border rounded-3xl h-96 overflow-y-auto border-restro-border-green bg-restro-surface shadow-sm">
+          <div className="py-5 px-6 border-b-0 bg-restro-surface rounded-t-3xl sticky top-0">
             <h3 className='font-bold'>{t('dashboard.top_selling_items')}</h3>
           </div>
 
@@ -142,21 +137,21 @@ export default function DashboardPage() {
 
         <div className="flex flex-col gap-6">
           {/* items sold */}
-        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green backdrop-blur">
+        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green bg-restro-surface shadow-sm">
           <h3 className="font-bold">{t('dashboard.orders')}</h3>
           <p className="mt-2 text-4xl">{ordersCount||0}</p>
         </div>
         {/* items sold */}
 
         {/* new customers */}
-        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green backdrop-blur">
+        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green bg-restro-surface shadow-sm">
           <h3 className="font-bold">{t('dashboard.new_customers')}</h3>
           <p className="mt-2 text-4xl">{newCustomerCount||0}</p>
         </div>
         {/* new customers */}
 
         {/* repeated customers */}
-        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green backdrop-blur">
+        <div className="border rounded-3xl h-28 py-5 px-6 border-restro-border-green bg-restro-surface shadow-sm">
           <h3 className="font-bold">{t('dashboard.repeat_customers')}</h3>
           <p className="mt-2 text-4xl">{repeatedCustomerCount||0}</p>
         </div>
@@ -164,7 +159,7 @@ export default function DashboardPage() {
         </div>
 
         {/* banner: view more in reports */}
-        <Link to="/dashboard/reports" className = "block rounded-3xl py-5 px-6 transition active:scale-95 border bg-[url(/assets/circle_illustration.svg)] bg-no-repeat bg-right-bottom border-restro-border-green hover:bg-restro-button-hover">
+        <Link to="/dashboard/reports" className="block rounded-3xl py-5 px-6 transition active:scale-95 border bg-restro-surface bg-[url(/assets/circle_illustration.svg)] bg-no-repeat bg-right-bottom border-restro-border-green hover:bg-restro-button-hover shadow-sm">
           <p>{t('dashboard.view_more_reports')} <IconChevronRight stroke={iconStroke}/></p>
         </Link>
         {/* banner: view more in reports */}

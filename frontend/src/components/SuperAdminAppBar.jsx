@@ -18,7 +18,6 @@ import { iconStroke } from "../config/config";
 import { getUserDetailsInLocalStorage } from "../helpers/UserDetails";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../contexts/ThemeContext";
-import clsx from "clsx";
 
 export default function SuperAdminAppBar() {
   const {t} = useTranslation();
@@ -52,13 +51,8 @@ export default function SuperAdminAppBar() {
       <Menu as="div" className="relative inline-block text-left z-50">
         <div>
           <Menu.Button
-            className={clsx(
-                        "text-sm transition rounded-full flex items-center gap-0 md:gap-2",
-                        theme === "black"
-                          ? "bg-restro-gray-dark-mode hover:bg-[#353535] text-white"
-                          : "bg-restro-green-light hover:bg-restro-green/30 text-restro-green-dark"
-                      )}
-            >
+            className="text-sm transition rounded-full flex items-center gap-0 md:gap-2 bg-restro-surface-muted hover:bg-restro-button-hover text-restro-text"
+          >
             <img
               src={AvatarImg}
               alt="avatar"
@@ -77,20 +71,16 @@ export default function SuperAdminAppBar() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className= 'absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-gray-600 rounded-2xl shadow-lg ring-1 ring-black/5 focus:outline-none bg-restro-gray'>
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-restro-border-green rounded-2xl shadow-lg ring-1 ring-black/5 focus:outline-none bg-restro-surface">
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
                   <Link
                     to="/superadmin/dashboard/contact-support"
                     className={`${
-                      theme === "black"
-                        ? active
-                          ? "bg-[#353535] text-white"
-                          : "text-white"
-                        : active
-                        ? "bg-restro-green-light text-restro-green-dark"
-                        : "text-restro-green-dark"
+                      active
+                        ? "bg-restro-surface-muted text-restro-green-dark"
+                        : "text-restro-text"
                     } group flex gap-2 w-full items-center rounded-2xl px-3 py-2 text-sm`}
                   >
                     <IconLifebuoy stroke={iconStroke} />
@@ -104,13 +94,9 @@ export default function SuperAdminAppBar() {
                   <Link
                     to="/superadmin/dashboard/language"
                     className={`${
-                      theme === "black"
-                        ? active
-                          ? "bg-[#353535] text-white"
-                          : "text-white"
-                        : active
-                        ? "bg-restro-green-light text-restro-green-dark"
-                        : "text-restro-green-dark"
+                      active
+                        ? "bg-restro-surface-muted text-restro-green-dark"
+                        : "text-restro-text"
                     } group flex gap-2 w-full items-center rounded-2xl px-3 py-2 text-sm`}
                   >
                     <IconLanguage stroke={iconStroke} />
@@ -124,13 +110,9 @@ export default function SuperAdminAppBar() {
                   <button
                     onClick={toggleTheme}
                     className={`${
-                      theme === "black"
-                        ? active
-                          ? "bg-[#353535] text-white"
-                          : "text-white"
-                        : active
-                        ? "bg-restro-green-light text-restro-green-dark"
-                        : "text-restro-green-dark"
+                      active
+                        ? "bg-restro-surface-muted text-restro-green-dark"
+                        : "text-restro-text"
                     } group flex gap-2 w-full items-center rounded-2xl px-3 py-2 text-sm`}>
                   {theme === "light" ? <IconMoon /> : <IconSun />}
                   {theme === "light" ? t("appbar.dark_mode") : t("appbar.light_mode")}
