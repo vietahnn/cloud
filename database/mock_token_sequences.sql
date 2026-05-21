@@ -1,3 +1,0 @@
--- No mock INSERTs found for token_sequences in mock files.
--- Placeholder example:
--- INSERT INTO token_sequences (sequence_no, last_updated, tenant_id) VALUES (1, NOW(), 100);
