@@ -1,0 +1,16 @@
+DELETE FROM order_items WHERE tenant_id = 100;
+DELETE FROM orders WHERE tenant_id = 100;
+DELETE FROM invoices WHERE tenant_id = 100;
+DELETE FROM reservations WHERE tenant_id = 100;
+DELETE FROM feedbacks WHERE tenant_id = 100;
+DELETE FROM menu_item_variants WHERE tenant_id = 100;
+DELETE FROM menu_item_addons WHERE tenant_id = 100;
+DELETE FROM menu_items WHERE tenant_id = 100;
+DELETE FROM categories WHERE tenant_id = 100;
+DELETE FROM store_tables WHERE tenant_id = 100;
+DELETE FROM payment_types WHERE tenant_id = 100;
+DELETE FROM customers WHERE tenant_id = 100;
+DELETE FROM users WHERE tenant_id = 100;
+DELETE FROM inventory_items WHERE tenant_id = 100;
+DELETE FROM store_details WHERE tenant_id = 100;
+DELETE FROM tenants WHERE id = 100;

@@ -1,0 +1,117 @@
+-- MOCK DATA GIAO DỊCH
+
+-- 15 Hóa đơn
+INSERT IGNORE INTO invoices (id, created_at, sub_total, tax_total, total, payment_type_id, tenant_id) VALUES
+(201, NOW() - INTERVAL 16 DAY, 153000, 17000, 170000, 101, 100),
+(202, NOW() - INTERVAL 21 DAY, 90000, 10000, 100000, 100, 100),
+(203, NOW() - INTERVAL 20 DAY, 522000, 58000, 580000, 101, 100),
+(204, NOW() - INTERVAL 19 DAY, 270000, 30000, 300000, 100, 100),
+(205, NOW() - INTERVAL 20 DAY, 108000, 12000, 120000, 101, 100),
+(206, NOW() - INTERVAL 12 DAY, 351000, 39000, 390000, 100, 100),
+(207, NOW() - INTERVAL 28 DAY, 378000, 42000, 420000, 101, 100),
+(208, NOW() - INTERVAL 13 DAY, 288000, 32000, 320000, 100, 100),
+(209, NOW() - INTERVAL 28 DAY, 423000, 47000, 470000, 101, 100),
+(210, NOW() - INTERVAL 1 DAY, 441000, 49000, 490000, 100, 100),
+(211, NOW() - INTERVAL 17 DAY, 117000, 13000, 130000, 101, 100),
+(212, NOW() - INTERVAL 8 DAY, 351000, 39000, 390000, 100, 100),
+(213, NOW() - INTERVAL 24 DAY, 360000, 40000, 400000, 101, 100),
+(214, NOW() - INTERVAL 4 DAY, 531000, 59000, 590000, 100, 100),
+(215, NOW() - INTERVAL 9 DAY, 108000, 12000, 120000, 101, 100);
+
+-- 15 Đơn hàng
+INSERT IGNORE INTO orders (id, date, delivery_type, customer_type, customer_id, table_id, status, token_no, payment_status, invoice_id, tenant_id) VALUES
+(201, NOW() - INTERVAL 15 DAY, 'Dine-in', 'CUSTOMER', '0911000002', 202, 'completed', 1, 'paid', 201, 100),
+(202, NOW() - INTERVAL 12 DAY, 'Dine-in', 'CUSTOMER', '0911000003', 203, 'cancelled', 2, 'paid', 202, 100),
+(203, NOW() - INTERVAL 8 DAY, 'Dine-in', 'CUSTOMER', '0911000004', 204, 'created', 3, 'paid', 203, 100),
+(204, NOW() - INTERVAL 23 DAY, 'Dine-in', 'CUSTOMER', '0911000005', 205, 'completed', 4, 'paid', 204, 100),
+(205, NOW() - INTERVAL 19 DAY, 'Dine-in', 'CUSTOMER', '0911000006', 201, 'cancelled', 5, 'paid', 205, 100),
+(206, NOW() - INTERVAL 25 DAY, 'Dine-in', 'CUSTOMER', '0911000007', 202, 'created', 6, 'paid', 206, 100),
+(207, NOW() - INTERVAL 8 DAY, 'Dine-in', 'CUSTOMER', '0911000008', 203, 'completed', 7, 'paid', 207, 100),
+(208, NOW() - INTERVAL 9 DAY, 'Dine-in', 'CUSTOMER', '0911000009', 204, 'cancelled', 8, 'paid', 208, 100),
+(209, NOW() - INTERVAL 3 DAY, 'Dine-in', 'CUSTOMER', '0911000010', 205, 'created', 9, 'paid', 209, 100),
+(210, NOW() - INTERVAL 28 DAY, 'Dine-in', 'CUSTOMER', '0911000011', 201, 'completed', 10, 'paid', 210, 100),
+(211, NOW() - INTERVAL 12 DAY, 'Dine-in', 'CUSTOMER', '0911000012', 202, 'cancelled', 11, 'paid', 211, 100),
+(212, NOW() - INTERVAL 16 DAY, 'Dine-in', 'CUSTOMER', '0911000013', 203, 'created', 12, 'paid', 212, 100),
+(213, NOW() - INTERVAL 4 DAY, 'Dine-in', 'CUSTOMER', '0911000014', 204, 'completed', 13, 'paid', 213, 100),
+(214, NOW() - INTERVAL 4 DAY, 'Dine-in', 'CUSTOMER', '0911000015', 205, 'cancelled', 14, 'paid', 214, 100),
+(215, NOW() - INTERVAL 7 DAY, 'Dine-in', 'CUSTOMER', '0911000001', 201, 'created', 15, 'paid', 215, 100);
+
+-- Chi tiết đơn hàng (Order Items)
+INSERT IGNORE INTO order_items (id, order_id, item_id, price, quantity, status, date, notes, tenant_id) VALUES
+(201, 201, 201, 15000, 1, 'preparing', NOW(), '', 100),
+(202, 201, 202, 30000, 2, 'preparing', NOW(), '', 100),
+(203, 201, 203, 45000, 1, 'preparing', NOW(), '', 100),
+(204, 202, 202, 15000, 1, 'completed', NOW(), '', 100),
+(205, 202, 203, 30000, 2, 'completed', NOW(), '', 100),
+(206, 202, 204, 45000, 1, 'completed', NOW(), '', 100),
+(207, 202, 205, 60000, 2, 'completed', NOW(), '', 100),
+(208, 203, 203, 15000, 1, 'preparing', NOW(), '', 100),
+(209, 203, 204, 30000, 2, 'preparing', NOW(), '', 100),
+(210, 204, 204, 15000, 1, 'completed', NOW(), '', 100),
+(211, 204, 205, 30000, 2, 'completed', NOW(), '', 100),
+(212, 204, 206, 45000, 1, 'completed', NOW(), '', 100),
+(213, 205, 205, 15000, 1, 'preparing', NOW(), '', 100),
+(214, 205, 206, 30000, 2, 'preparing', NOW(), '', 100),
+(215, 205, 207, 45000, 1, 'preparing', NOW(), '', 100),
+(216, 205, 208, 60000, 2, 'preparing', NOW(), '', 100),
+(217, 206, 206, 15000, 1, 'completed', NOW(), '', 100),
+(218, 206, 207, 30000, 2, 'completed', NOW(), '', 100),
+(219, 207, 207, 15000, 1, 'preparing', NOW(), '', 100),
+(220, 207, 208, 30000, 2, 'preparing', NOW(), '', 100),
+(221, 207, 209, 45000, 1, 'preparing', NOW(), '', 100),
+(222, 208, 208, 15000, 1, 'completed', NOW(), '', 100),
+(223, 208, 209, 30000, 2, 'completed', NOW(), '', 100),
+(224, 208, 200, 45000, 1, 'completed', NOW(), '', 100),
+(225, 208, 201, 60000, 2, 'completed', NOW(), '', 100),
+(226, 209, 209, 15000, 1, 'preparing', NOW(), '', 100),
+(227, 209, 200, 30000, 2, 'preparing', NOW(), '', 100),
+(228, 210, 200, 15000, 1, 'completed', NOW(), '', 100),
+(229, 210, 201, 30000, 2, 'completed', NOW(), '', 100),
+(230, 210, 202, 45000, 1, 'completed', NOW(), '', 100),
+(231, 211, 201, 15000, 1, 'preparing', NOW(), '', 100),
+(232, 211, 202, 30000, 2, 'preparing', NOW(), '', 100),
+(233, 211, 203, 45000, 1, 'preparing', NOW(), '', 100),
+(234, 211, 204, 60000, 2, 'preparing', NOW(), '', 100),
+(235, 212, 202, 15000, 1, 'completed', NOW(), '', 100),
+(236, 212, 203, 30000, 2, 'completed', NOW(), '', 100),
+(237, 213, 203, 15000, 1, 'preparing', NOW(), '', 100),
+(238, 213, 204, 30000, 2, 'preparing', NOW(), '', 100),
+(239, 213, 205, 45000, 1, 'preparing', NOW(), '', 100),
+(240, 214, 204, 15000, 1, 'completed', NOW(), '', 100),
+(241, 214, 205, 30000, 2, 'completed', NOW(), '', 100),
+(242, 214, 206, 45000, 1, 'completed', NOW(), '', 100),
+(243, 214, 207, 60000, 2, 'completed', NOW(), '', 100),
+(244, 215, 205, 15000, 1, 'preparing', NOW(), '', 100),
+(245, 215, 206, 30000, 2, 'preparing', NOW(), '', 100);
+
+-- Đặt bàn (Reservations)
+INSERT IGNORE INTO reservations (id, customer_id, date, table_id, status, notes, people_count, unique_code, tenant_id) VALUES
+(201, '0911000002', NOW() + INTERVAL 1 DAY, 202, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680791', 100),
+(202, '0911000003', NOW() + INTERVAL 2 DAY, 203, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680792', 100),
+(203, '0911000004', NOW() + INTERVAL 3 DAY, 204, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680793', 100),
+(204, '0911000005', NOW() + INTERVAL 4 DAY, 205, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680794', 100),
+(205, '0911000006', NOW() + INTERVAL 5 DAY, 201, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680795', 100),
+(206, '0911000007', NOW() + INTERVAL 6 DAY, 202, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680796', 100),
+(207, '0911000008', NOW() + INTERVAL 7 DAY, 203, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680797', 100),
+(208, '0911000009', NOW() + INTERVAL 8 DAY, 204, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680798', 100),
+(209, '0911000010', NOW() + INTERVAL 9 DAY, 205, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV17793308680799', 100),
+(210, '0911000011', NOW() + INTERVAL 10 DAY, 201, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807910', 100),
+(211, '0911000012', NOW() + INTERVAL 11 DAY, 202, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807911', 100),
+(212, '0911000013', NOW() + INTERVAL 12 DAY, 203, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807912', 100),
+(213, '0911000014', NOW() + INTERVAL 13 DAY, 204, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807913', 100),
+(214, '0911000015', NOW() + INTERVAL 14 DAY, 205, 'confirmed', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807914', 100),
+(215, '0911000001', NOW() + INTERVAL 15 DAY, 201, 'pending', 'Kỷ niệm sinh nhật', 4, 'RESV177933086807915', 100);
+
+-- Phản hồi khách hàng (Feedbacks)
+INSERT IGNORE INTO feedbacks (id, invoice_id, phone, date, created_by, average_rating, food_quality_rating, service_rating, staff_behavior_rating, ambiance_rating, recommend_rating, remarks, tenant_id) VALUES
+(201, 201, '0911000002', NOW() - INTERVAL 1 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(202, 202, '0911000003', NOW() - INTERVAL 2 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(203, 203, '0911000004', NOW() - INTERVAL 3 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(204, 204, '0911000005', NOW() - INTERVAL 4 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(205, 205, '0911000006', NOW() - INTERVAL 5 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(206, 206, '0911000007', NOW() - INTERVAL 6 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(207, 207, '0911000008', NOW() - INTERVAL 7 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(208, 208, '0911000009', NOW() - INTERVAL 8 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(209, 209, '0911000010', NOW() - INTERVAL 9 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100),
+(210, 210, '0911000011', NOW() - INTERVAL 10 DAY, 'Customer', 5, 5, 4.5, 5, 4, 5, 'Rất ngon, sẽ quay lại!', 100);
+
