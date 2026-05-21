@@ -1,0 +1,3 @@
+-- No direct mock INSERTs found for qr_orders in mock files.
+-- Example placeholder:
+-- INSERT INTO qr_orders (id, delivery_type, customer_type, customer_id, table_id, payment_status, tenant_id) VALUES (301, 'Dine-in', 'CUSTOMER', '0911000020', 201, 'pending', 100);

@@ -1,0 +1,3 @@
+-- No mock INSERTs found for inventory_logs in mock files.
+-- Placeholder example:
+-- INSERT INTO inventory_logs (tenant_id, inventory_item_id, type, quantity_change, previous_quantity, new_quantity, note, created_by) VALUES (100, 1, 'adjustment', -10, 100, 90, 'Used in recipe', 'system');

@@ -1,0 +1,3 @@
+-- No mock INSERTs found for refresh_tokens in mock files.
+-- Placeholder:
+-- INSERT INTO refresh_tokens (username, refresh_token, device_ip, expiry, tenant_id) VALUES ('admin', 'token123', '127.0.0.1', NOW() + INTERVAL 30 DAY, 100);
