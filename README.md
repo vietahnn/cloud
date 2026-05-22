@@ -1,221 +1,184 @@
-# RESTROPro SaaS POS
+# Restauranteur SaaS POS
 
-Point‑of‑Sale (POS) system for restaurants, cafes, hotels, and food trucks.
+Restauranteur is a multi-tenant Point-of-Sale (POS) platform for restaurants, cafes, hotels, and food trucks. It includes a web POS, kitchen flow, invoicing, inventory, reports, and optional QR ordering.
 
-**Tech stack**
+## Tech Stack
 
-- **Frontend**: React.js, Tailwind CSS
-- **Backend**: Node.js, Express.js
-- **Database**: MySQL
-- **Deployment**: Docker / Cloud (e.g., AWS, DigitalOcean)
+- Frontend: React, Vite, Tailwind CSS, DaisyUI
+- Backend: Node.js, Express.js, Socket.IO
+- Database: MySQL
 
----
+## Features
 
-## 🚀 Features
+- Multi-tenant SaaS with roles and permissions
+- POS order flow, kitchen updates, and invoice printing
+- Menu, category, and addon management
+- Tables and floors
+- Inventory tracking and usage logs
+- Reports and dashboards
+- QR menu and feedback flow
+- Email receipts (SMTP)
 
-- Multi‑tenant SaaS: Create and manage independent businesses
-- User authentication: Admins, staff, and roles
-- Menu & product management: Categories, items, pricing, modifiers
-- Order processing: POS UI, kitchen display, invoice/bill printing
-- Table management: Floor plans, table statuses, split‑check support
-- Inventory tracking
-- Reports & analytics: Sales summaries, daily/weekly reports
-- Settings: Tax, tips, payment methods (cash/card), receipts
-- Integrations (optional): Payment gateways, QR ordering, delivery platforms
+## Requirements
 
----
-
-## 🎞️ Getting Started
-
-### Prerequisites
-
-- Node.js ≥ 16
-- MySQL ≥ 8
+- Node.js 16+
+- MySQL 8+
 - Git
-- (Optional) Docker
 
-### Setup Instructions
+## Setup
 
-1. **Clone the repository**
+1) Clone the repo
 
-   ```bash
-   git clone https://github.com/your‑org/restropro-pos.git
-   cd restropro-pos
-   ```
+```bash
+git clone https://github.com/your-org/restauranteur.git
+cd restauranteur
+```
 
-2. **Install backend dependencies**
+2) Backend install
 
-   ```bash
-   cd backend
-   npm install
-   ```
+```bash
+cd backend
+npm install
+```
 
-3. **Install frontend dependencies**
+3) Backend env
 
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+Copy [backend/.env.example](backend/.env.example) to [backend/.env](backend/.env) and set values. Minimum for local dev:
 
-4. **Configure environment variables**\
-   Create `.env.local` in `frontend` and `.env` in `backend` using the `.env.example` templates.\
-   Sample variables:
+```env
+DATABASE_URL="mysql://user:pass@localhost:3306/restauranteur"
+JWT_SECRET=restro_jwt_secret
+JWT_EXPIRY=15m
+JWT_EXPIRY_REFRESH=30d
+COOKIE_EXPIRY=300000
+COOKIE_EXPIRY_REFRESH=2592000000
+PASSWORD_SALT=10
+FRONTEND_DOMAIN="http://localhost:5173"
+FRONTEND_DOMAIN_COOKIE="localhost"
+ENCRYPTION_KEY=uiflow
+```
 
-   **backend/.env**
+Optional SMTP for email receipts:
 
-   ```
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_USER=root
-   DB_PASS=yourpassword
-   DB_NAME=restropro
-   JWT_SECRET=your_jwt_secret
-   PORT=4000
-   ```
+```env
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587
+SMTP_EMAIL=you@domain.com
+SMTP_PASSWORD=app_password_or_smtp_password
+```
 
-   **frontend/.env.local**
+4) Database
 
-   ```
-   REACT_APP_BACKEND_URL=http://localhost:4000/api
-   ```
+Create a MySQL database and import one of the SQL files under [database](database). Example:
 
-5. **Initialize database**\
-   Ensure your MySQL service is running. Then:
+```bash
+mysql -u root -p restauranteur < database/restropro_saas.sql
+```
 
-   ```bash
-   cd backend
-   npm run migrate
-   npm run seed
-   ```
+5) Frontend install
 
-6. **Run in development**
+```bash
+cd ../frontend
+npm install
+```
 
-   - **Backend**
-     ```bash
-     cd backend
-     npm run dev
-     ```
-   - **Frontend**
-     ```bash
-     cd ../frontend
-     npm start
-     ```
+6) Frontend env
 
-   Your app should now be accessible at `http://localhost:3000`.
+Copy [frontend/.env.example](frontend/.env.example) to [frontend/.env.local](frontend/.env.local) and set values. Example:
 
----
+```env
+VITE_BACKEND=http://localhost:3000/api/v1
+VITE_BACKEND_SOCKET_IO=http://localhost:3000
+VITE_BACKEND_IMAGES_BASE_URL=http://localhost:3000
+VITE_FRONTEND_DOMAIN=http://localhost:5173
+```
 
-## 🧰 Available Scripts
+7) Run dev servers
 
-### Backend (Node.js / Express)
+Backend (default port 3000):
 
-- `npm run dev`: Start development server with hot reload
-- `npm run build`: Compile production build
-- `npm start`: Start production server
-- `npm run migrate`: Run DB migrations
-- `npm run seed`: Seed initial mock data
+```bash
+cd backend
+npm run dev
+```
 
-### Frontend (React.js / Tailwind)
+Frontend (Vite, default port 5173):
 
-- `npm start`: Launch development server
-- `npm run build`: Create optimized production build
-- `npm test`: Run UI tests
+```bash
+cd ../frontend
+npm run dev
+```
 
----
+Open http://localhost:5173
 
-## ⚙️ Project Structure
+## Scripts
+
+Backend:
+
+- npm run dev
+- npm start
+
+Frontend:
+
+- npm run dev
+- npm run build
+- npm run preview
+
+## Project Structure
 
 ```
 .
 ├── backend
 │   ├── src
-│   │   ├── controllers/   # API logic
-│   │   ├── models/        # Sequelize or TypeORM schema
-│   │   ├── routes/        # Express routing
-│   │   ├── middlewares/
-│   │   ├── utils/
-│   │   ├── config/        # DB, server settings
-│   ├── migrations/
-│   ├── seeds/
-│   └── tests/
-└── frontend
-    ├── src
-    │   ├── components/
-    │   ├── pages/
-    │   ├── styles/
-    │   ├── context/       # React Context or Zustand
-    │   ├── hooks/
-    │   ├── services/      # API service calls (axios / fetch)
-    │   └── assets/
-    ├── public/
-    └── tailwind.config.js
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── middlewares
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── utils
+│   │   └── app.js
+│   └── public
+├── database
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── config
+│   │   ├── contexts
+│   │   ├── controllers
+│   │   ├── helpers
+│   │   ├── utils
+│   │   └── views
+│   └── public
+└── translations
 ```
 
----
+## Environment Variables
 
-## ✅ Authentication & Authorization
+Backend env (see [backend/.env.example](backend/.env.example)):
 
-- JWT-based auth for backend APIs
-- Role-based frontend routing and UI: Admins vs Staff
-- Secure store of tokens in HTTP-only cookies / `localStorage`
+- DATABASE_URL
+- JWT_SECRET
+- JWT_EXPIRY
+- JWT_EXPIRY_REFRESH
+- COOKIE_EXPIRY
+- COOKIE_EXPIRY_REFRESH
+- PASSWORD_SALT
+- FRONTEND_DOMAIN
+- FRONTEND_DOMAIN_COOKIE
+- STRIPE_SECRET (optional)
+- STRIPE_WEBHOOK_SECRET (optional)
+- SMTP_HOST, SMTP_PORT, SMTP_EMAIL, SMTP_PASSWORD (optional)
+- ENCRYPTION_KEY
 
----
+Frontend env (see [frontend/.env.example](frontend/.env.example)):
 
-## 🧪 Testing
+- VITE_BACKEND
+- VITE_BACKEND_SOCKET_IO
+- VITE_BACKEND_IMAGES_BASE_URL
+- VITE_FRONTEND_DOMAIN
+- VITE_STRIPE_PRODUCT_SUBSCRIPTION_KEY (optional)
 
-- **Backend**: Jest + Supertest
-  ```bash
-  npm test
-  ```
-- **Frontend**: React Testing Library + Jest
-  ```bash
-  npm test
-  ```
+## License
 
----
-
-## 📦 Deployment Options
-
-- Docker-compose: `frontend`, `backend`, `mysql`, `redis`
-- Deploy to AWS EC2, ECS, or DigitalOcean App Platform
-- Use managed MySQL (e.g., RDS). Configure `DB_*` variables accordingly.
-
----
-
-## ⚙️ Environment Variables
-
-| Name                    | Description          | Default                     |
-| ----------------------- | -------------------- | --------------------------- |
-| `DB_HOST`               | MySQL hostname or IP | `localhost`                 |
-| `DB_PORT`               | MySQL port           | `3306`                      |
-| `DB_USER`               | MySQL user           | `root`                      |
-| `DB_PASS`               | MySQL password       | *(none)*                    |
-| `DB_NAME`               | Database name        | `restropro`                 |
-| `JWT_SECRET`            | JWT encryption key   | *(set it)*                  |
-| `PORT`                  | Backend server port  | `4000`                      |
-| `REACT_APP_BACKEND_URL` | API endpoint URL     | `http://localhost:4000/api` |
-
----
-
-## 🙏 Contributing
-
-1. Fork and create a feature branch
-2. Write clean, tested code
-3. Open a Pull Request detailing changes
-
----
-
-## 📝 License
-
-Licensed under the **[insert license here]**.
-
----
-
-## 📞 Contact
-
-For questions, feature requests, or issues, open a GitHub Issue or email [**support@example.com**](mailto\:support@example.com).
-
----
-
-Thanks for using RESTROPro – powering restaurant businesses with seamless SaaS POS!
+See [LICENSE](LICENSE).
 
