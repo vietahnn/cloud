@@ -1,20 +1,17 @@
 import React from 'react'
 import AppBarDropdown from '../components/AppBarDropdown'
 import Page from "../components/Page";
-import Logo from "../assets/logo.svg";
-import LogoDark from "../assets/LogoDark.svg"
+import BrandText from "../components/BrandText";
 import { IconCircleCheckFilled, IconLogout } from '@tabler/icons-react';
 import { iconStroke } from '../config/config';
 import toast from 'react-hot-toast';
 import { signOut } from '../controllers/auth.controller';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import { useTheme } from '../contexts/ThemeContext';
 
 export default function PaymentSuccessPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {theme} = useTheme();
   const btnLogout = async () => {
     try {
       toast.loading(t("loading_message"));
@@ -36,7 +33,7 @@ export default function PaymentSuccessPage() {
   return (
     <Page className=''>
       <div className="fixed flex items-center justify-between px-4 py-3 border-b border-restro-border-green w-full dark:bg-black">
-        <img src={theme === "black" ? LogoDark : Logo} alt="logo" className="h-12 block" />
+        <BrandText className="text-restro-green-dark dark:text-white text-lg" />
 
         {/* profile */}
         <AppBarDropdown />

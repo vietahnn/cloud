@@ -52,12 +52,7 @@ export default function AppBarDropdown() {
     <Menu as="div" className="relative inline-block text-left z-50">
       <div>
         <Menu.Button
-          className={clsx(
-            "text-sm transition rounded-full flex items-center gap-0 md:gap-2",
-            theme === "black"
-              ? "bg-restro-gray hover:bg-restro-button-hover text-white"
-              : "bg-restro-green-light hover:bg-restro-button-hover text-restro-green-dark"
-          )}
+          className="text-sm transition rounded-full flex items-center gap-0 md:gap-2 bg-restro-surface-muted hover:bg-restro-button-hover text-restro-text"
         >
           <img src={AvatarImg} alt="avatar" className="w-10 h-10 rounded-full p-1" />
           <p className="font-medium hidden md:block">{user.name}</p>
@@ -76,8 +71,7 @@ export default function AppBarDropdown() {
       >
         <Menu.Items
           className={clsx(
-            "absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 dark:divide-gray-600 rounded-2xl shadow-lg ring-1 ring-black/5 focus:outline-none bg-background border-restro-border-green"
-            
+            "absolute right-0 mt-2 w-56 origin-top-right divide-y divide-restro-border-green rounded-2xl shadow-lg ring-1 ring-black/5 focus:outline-none bg-restro-surface"
           )}
         >
           <div className="px-1 py-1">

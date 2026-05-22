@@ -1,3 +1,0 @@
--- No mock INSERTs found for exchange_rates in mock files.
--- Placeholder example:
--- INSERT INTO exchange_rates (currency_from, currency_to, rate, tenant_id) VALUES ('USD', 'VND', 24000, 100);

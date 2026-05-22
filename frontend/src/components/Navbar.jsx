@@ -17,8 +17,7 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react";
 import { clsx } from "clsx";
-import Logo from "../assets/logo.svg";
-import LogoDark from "../assets/LogoDark.svg"
+import BrandText from "./BrandText";
 import AvatarImg from "../assets/avatar.svg";
 import { iconStroke } from "../config/config";
 import { getUserDetailsInLocalStorage } from "../helpers/UserDetails";
@@ -26,7 +25,6 @@ import { NavbarContext } from "../contexts/NavbarContext";
 import { toggleNavbar } from "../helpers/NavbarSettings";
 import { SCOPES } from "../config/scopes";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../contexts/ThemeContext";
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -34,7 +32,6 @@ export default function Navbar() {
   const user = getUserDetailsInLocalStorage();
   const { role: userRole, scope } = user;
   const userScopes = scope?.split(",");
-  const { theme } = useTheme();
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useContext(NavbarContext);
 
   const navbarItems = [
@@ -144,9 +141,11 @@ export default function Navbar() {
 
   if (isNavbarCollapsed) {
     return (
-       <div className ="flex flex-col items-start gap-4 h-screen px-5 py-6 overflow-y-auto fixed left-0 top-0 bg-restro-green-light">
+      <div className="flex flex-col items-start gap-4 h-screen px-5 py-6 overflow-y-auto fixed left-0 top-0 bg-[linear-gradient(180deg,#2C4F9E_0%,#152C57_100%)] text-restro-sidebar-text">
 
-      <img src={theme === "black" ? LogoDark : Logo} alt="logo" className="w-12 block mb-6" />
+      <div className="w-full text-center">
+        <BrandText className="text-white text-[0.7rem] leading-tight" />
+      </div>
         {navbarItems.filter((navItem)=>{
           const requiredScopes = navItem.scopes;
           if(navItem.type=="link") {
@@ -165,24 +164,16 @@ export default function Navbar() {
             <Link
               key={index}
               className={clsx(
-                `w-12 h-12 flex items-center justify-center rounded-full transition`,
+                "w-12 h-12 flex items-center justify-center rounded-full transition text-restro-sidebar-text",
                 {
-                  "bg-restro-bg-hover-dark-mode font-medium text-white": theme === 'black' && pathname.includes(item.path),
-                  "bg-restro-border-green-light font-medium text-black": theme !== 'black' && pathname.includes(item.path),
-                  "hover:bg-restro-bg-hover-dark-mode": theme === 'black' && !pathname.includes(item.path),
-                  "hover:bg-restro-border-green-light": theme !== 'black' && !pathname.includes(item.path),
+                  "bg-restro-sidebar-active text-white": pathname.includes(item.path),
+                  "hover:bg-restro-sidebar-active": !pathname.includes(item.path),
                 }
               )}
               to={item.path}
             >
               {React.cloneElement(item.icon, {
-                className: clsx(
-                  "transition-colors text-current",
-                  {
-                    'text-white': theme === 'black' && pathname.includes(item.path),
-                    'text-black': theme !== 'black' && pathname.includes(item.path),
-                  }
-                ),
+                className: "transition-colors text-current",
               })}
             </Link>
           );
@@ -190,7 +181,7 @@ export default function Navbar() {
 
         <button
           onClick={btnToggleNavbar}
-          className="w-12 h-12 flex items-center justify-center rounded-full transitionborder border-restro-green-light hover:bg-restro-border-green text-restro-text"
+          className="w-12 h-12 flex items-center justify-center rounded-full border border-restro-border-green-light bg-restro-surface-muted hover:bg-restro-button-hover text-restro-text"
         >
           <IconChevronRight stroke={iconStroke} />
         </button>
@@ -200,8 +191,8 @@ export default function Navbar() {
 
   return (
     <div className="relative h-screen">
-      <div className="flex flex-col items-start gap-2 md:w-72  md:gap-3 h-screen px-5 py-6 overflow-y-auto fixed left-0 top-0 bg-restro-green-light">
-        <img src={theme === 'black' ? LogoDark : Logo } alt="logo" className="block w-12 md:w-auto md:h-14 mb-2 md:mb-6"/>
+      <div className="flex flex-col items-start gap-2 md:w-72 md:gap-3 h-screen px-5 py-6 overflow-y-auto fixed left-0 top-0 bg-[linear-gradient(180deg,#2C4F9E_0%,#152C57_100%)] text-restro-sidebar-text">
+        <BrandText className="text-white text-lg md:text-2xl" />
 
         <div className="hidden md:flex items-center gap-2 w-full md:mb-6">
           <img
@@ -211,7 +202,7 @@ export default function Navbar() {
           />
           <div>
             <p className="font-medium">{user.name}</p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-restro-sidebar-muted">
               {new String(user.role).toUpperCase()}
               {user.designation && <span>, {user.designation}</span>}
             </p>
@@ -245,37 +236,17 @@ export default function Navbar() {
             key={index}
             to={item.path}
             className={clsx(
-              `w-12 h-12 md:w-full flex justify-center md:justify-normal items-center md:gap-1 md:px-4 md:py-3 rounded-full transition group`,
+              "w-12 h-12 md:w-full flex justify-center md:justify-normal items-center md:gap-2 md:px-4 md:py-3 rounded-full transition group text-restro-sidebar-text",
               {
-                'bg-restro-border-green-light font-medium': theme !== 'black' && pathname.includes(item.path),
-                'bg-restro-bg-hover-dark-mode font-medium text-white': theme === 'black' && pathname.includes(item.path),
-                'hover:bg-restro-bg-hover-dark-mode hover:text-white': theme === 'black' && !pathname.includes(item.path),
-                'hover:bg-restro-border-green-light': theme !== 'black' && !pathname.includes(item.path),
-                'text-white': theme === 'black' && !pathname.includes(item.path),
-                'text-black': theme === 'black' && pathname.includes(item.path),
-                'text-restro-text-light-mode hover:text-black': theme !== 'black',
+                "bg-restro-sidebar-active text-white": pathname.includes(item.path),
+                "hover:bg-restro-sidebar-active": !pathname.includes(item.path),
               }
             )}
           >
             {React.cloneElement(item.icon, {
-              className: clsx(
-                'transition-colors',
-                {
-                  'text-white group-hover:text-white hover:text-white': theme === 'black',
-                  'text-black': theme !== 'black',
-                }
-              ),
+              className: "transition-colors text-current",
             })}
-            <p
-              className={clsx(
-                'hidden md:block transition-colors',
-                {
-                  'text-white group-hover:text-white hover:text-white': theme === 'black',
-                  'text-gray-900 group-hover:text-black': theme !== 'black',
-                  'text-black': theme !== 'black' && pathname.includes(item.path),
-                }
-              )}
-            >
+            <p className="hidden md:block transition-colors">
               {item.text}
             </p>
           </Link>
@@ -286,7 +257,7 @@ export default function Navbar() {
 
       <button
         onClick={btnToggleNavbar}
-        className="w-9 h-9 hidden md:flex items-center justify-center rounded-full border transition bg-restro-green-light border-restro-border-green dark:bg-restro-gray hover:bg-gray-100 dark:hover:bg-restro-button-hover text-gray-500 fixed bottom-4 left-[17.5rem] -translate-x-1/2"
+        className="w-9 h-9 hidden md:flex items-center justify-center rounded-full border transition bg-restro-surface-muted border-restro-border-green hover:bg-restro-button-hover text-restro-text fixed bottom-4 left-[17.5rem] -translate-x-1/2"
       >
         <IconChevronLeft stroke={iconStroke} size={18} />
       </button>

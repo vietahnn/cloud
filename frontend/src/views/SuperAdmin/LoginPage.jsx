@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import Logo from "../../assets/logo.svg";
-import LogoDark from "../../assets/LogoDark.svg";
+import BrandText from "../../components/BrandText";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -10,11 +9,9 @@ import {
   saveUserDetailsInLocalStorage,
 } from "../../helpers/UserDetails";
 import { signIn } from "../../controllers/superadmin.controller";
-import { useTheme } from "../../contexts/ThemeContext";
 
 export default function SuperAdminLoginPage() {
   const { t } = useTranslation();
-  const {theme} = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,7 +79,7 @@ export default function SuperAdminLoginPage() {
   };
 
   return (
-    <div className='relative overflow-x-hidden md:overflow-hidden  bg-restro-green-light dark:bg-restro-card-bg'>
+    <div className='relative overflow-x-hidden md:overflow-hidden bg-restro-bg-gray'>
       <img
         src="/assets/circle_illustration.svg"
         alt="illustration"
@@ -90,23 +87,21 @@ export default function SuperAdminLoginPage() {
       />
 
       <div className="flex flex-col md:flex-row items-center justify-end md:justify-between gap-10 h-screen container mx-auto px-4 md:px-0 py-4 md:py-0 relative lg:px-12">
-        <div>
-          <h3 className = "text-2xl lg:text-6xl font-black text-restro-green-dark dark:text-restro-green-dark-mode">
+        <div className="lg:mx-12">
+          <h3 className="text-2xl lg:text-6xl font-semibold text-restro-green-dark">
             {t("superadmin_login.title")}
           </h3>
-          <h3 className = 'text-2xl lg:text-6xl font-black outline-text dark:text-green-600 text-green-700'>
+          <h3 className="text-2xl lg:text-6xl font-semibold outline-text text-restro-green-light">
             {t("superadmin_login.login")}.
           </h3>
         </div>
 
-        <div className = 'bg-white dark:bg-black border border-restro-green-light rounded-2xl px-8 py-8 w-full sm:w-96 mx-8 sm:mx-0 shadow-2xl'>
+        <div className="bg-restro-surface border border-restro-border-green rounded-2xl px-8 py-8 w-full sm:w-96 mx-8 sm:mx-0 shadow-sm">
           <div className="flex items-center justify-between">
-            <div className='text-xl font-medium text-green-100'>
+            <div className="text-xl font-medium text-restro-green-dark">
               {t("superadmin_login.login")}
             </div>
-            <div>
-              <img src={theme === "black" ? LogoDark : Logo} className="h-16" />
-            </div>
+            <BrandText className="text-restro-green-dark text-lg" />
           </div>
 
           <form className="mt-6" onSubmit={handleSubmit}>
@@ -120,7 +115,7 @@ export default function SuperAdminLoginPage() {
                 name="username"
                 required
                 placeholder={t("superadmin_login.email_placeholder")}
-                className = 'mt-1 block w-full px-4 py-3 rounded-xl outline-none focus-visible:ring-1 bg-restro-gray text-restro-text focus-visible:ring-restro-ring'
+                className='mt-1 block w-full px-4 py-3 rounded-xl outline-none focus-visible:ring-1 bg-restro-gray text-restro-text focus-visible:ring-restro-ring'
               />
             </div>
 
@@ -134,7 +129,7 @@ export default function SuperAdminLoginPage() {
                 name="password"
                 required
                 placeholder={t("superadmin_login.password_placeholder")}
-                className = 'mt-1 block w-full px-4 py-3 rounded-xl outline-none focus-visible:ring-1 bg-restro-gray text-restro-text focus-visible:ring-restro-ring'
+                className='mt-1 block w-full px-4 py-3 rounded-xl outline-none focus-visible:ring-1 bg-restro-gray text-restro-text focus-visible:ring-restro-ring'
               />
             </div>
 

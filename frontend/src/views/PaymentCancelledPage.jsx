@@ -1,22 +1,20 @@
 import React from 'react'
 import AppBarDropdown from '../components/AppBarDropdown'
 import Page from "../components/Page";
-import Logo from "../assets/logo.svg";
+import BrandText from "../components/BrandText";
 import { IconChevronLeft, IconCircleXFilled } from '@tabler/icons-react';
 import { iconStroke } from '../config/config';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import { useTheme } from '../contexts/ThemeContext';
 
 export default function PaymentCancelledPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {theme } = useTheme();
 
   return (
     <Page className=''>
       <div className="fixed flex items-center justify-between px-4 py-3 border-b border-restro-border-green w-full">
-        <img src={Logo} alt="logo" className="h-12 block" />
+        <BrandText className="text-restro-green-dark dark:text-white text-lg" />
 
         {/* profile */}
         <AppBarDropdown />

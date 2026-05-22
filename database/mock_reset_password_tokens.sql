@@ -1,3 +1,0 @@
--- No mock INSERTs found for reset_password_tokens in mock files.
--- Placeholder example:
--- INSERT INTO reset_password_tokens (user_id, token, expires_at, tenant_id) VALUES (1, 'abcdef', NOW() + INTERVAL 1 HOUR, 100);

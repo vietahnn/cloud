@@ -1,3 +1,0 @@
--- No mock INSERTs found for invoice_sequences in mock files.
--- Placeholder:
--- INSERT INTO invoice_sequences (sequence_no, tenant_id) VALUES (1, 100);
