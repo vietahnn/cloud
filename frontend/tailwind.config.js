@@ -26,6 +26,12 @@ export default {
         'restro-bg-yellow' : 'var(--restro-bg-yellow)',
         'restro-yellow-hover' : 'var(--restro-yellow-hover)',
         'restro-checkbox' : 'var(--restro-checkbox)',
+        'restro-sidebar-bg' : 'var(--restro-sidebar-bg)',
+        'restro-sidebar-active' : 'var(--restro-sidebar-active)',
+        'restro-sidebar-text' : 'var(--restro-sidebar-text)',
+        'restro-sidebar-muted' : 'var(--restro-sidebar-muted)',
+        'restro-surface' : 'var(--restro-surface)',
+        'restro-surface-muted' : 'var(--restro-surface-muted)',
 
         'background': 'var(--background)',
         'foreground': 'var(--foreground)',
@@ -33,11 +39,11 @@ export default {
 
         // 'restro-green-light': "#ECF1EB",
         'restro-green': "var(--restro-green)",
-        'restro-green-dark': "#243922",
-        'restro-border-green-light': "#DCE7DB",
-        'restro-superadmin-widget-bg': "#BEDC74",
-        'restro-superadmin-text-green': "#387F39",
-        'restro-superadmin-text-black': "#444444",
+        'restro-green-dark': "var(--restro-green-dark)",
+        'restro-border-green-light': "var(--restro-border-green-light)",
+        'restro-superadmin-widget-bg': "var(--restro-superadmin-widget-bg)",
+        'restro-superadmin-text-green': "var(--restro-superadmin-text-green)",
+        'restro-superadmin-text-black': "var(--restro-superadmin-text-black)",
 
         // 'restro-text-light-mode' : "#FFFFFF",
         // 'restro-text-dark-mode' : "#F0F0F0",
@@ -58,7 +64,7 @@ export default {
         
         //light theme colors
         'restro-border-light-mode' : '#DCE7DB',
-        'restro-text-light-mode' : '#BDBDBD',
+        'restro-text-light-mode' : '#B5C0D1',
 
 
       }

@@ -3,7 +3,6 @@ import Page from "../../components/Page";
 import { useSuperAdminReports } from '../../controllers/superadmin.controller';
 import { IconBuildingStore, IconCarrot, IconFilter, IconInfoCircleFilled, IconListDetails } from '@tabler/icons-react';
 import { iconStroke, subscriptionAmount } from '../../config/config';
-import ImgGirlSmiling from "../../assets/girl-smiling.webp"
 import { useTranslation } from "react-i18next";
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -82,12 +81,11 @@ export default function SuperAdminReportsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
 
-        <div className='md:row-span-3 h-[28rem] bg-restro-superadmin-widget-bg rounded-[42px] overflow-hidden'>
+        <div className='md:row-span-3 h-[28rem] bg-restro-superadmin-widget-bg rounded-[42px] overflow-hidden flex flex-col items-center justify-center'>
           <p className='text-restro-superadmin-text-green font-bold text-center mt-4'>{t("superadmin_reports.active_tenants")}</p>
           <p className='text-white font-black text-7xl text-center'>{Number(activeTenants).toLocaleString("en", {
             notation: "compact"
           })}</p>
-          <img src={ImgGirlSmiling} alt="img" className='block h-96 mx-auto' />
         </div>
 
         <div className = 'md:row-span-3 h-[28rem] rounded-[42px] overflow-y-auto scrollbar-none border border-restro-border-green text-black dark:text-white'>

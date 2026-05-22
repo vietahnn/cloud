@@ -1,10 +1,14 @@
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_121_84)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M100 200C155.228 200 200 155.228 200 100C200 44.7715 155.228 0 100 0C44.7715 0 0 44.7715 0 100C0 155.228 44.7715 200 100 200ZM131.772 172.182C166.057 172.182 193.851 144.388 193.851 110.103C193.851 75.8172 166.057 48.0234 131.772 48.0234C97.4863 48.0234 69.6926 75.8172 69.6926 110.103C69.6926 144.388 97.4863 172.182 131.772 172.182Z" fill="#70B56A"/>
-</g>
-<defs>
-<clipPath id="clip0_121_84">
-<rect width="200" height="200" fill="white"/>
-</clipPath>
-</defs>
+<?xml version="1.0"?>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="clip0_121_84">
+   <rect fill="white" height="200" id="svg_1" width="200"/>
+  </clipPath>
+ </defs>
+ <g class="layer">
+  <title>Layer 1</title>
+  <g clip-path="url(#clip0_121_84)" fill-opacity="0.96" id="svg_2">
+   <path clip-rule="evenodd" d="m100,200c55.23,0 100,-44.77 100,-100c0,-55.23 -44.77,-100 -100,-100c-55.23,0 -100,44.77 -100,100c0,55.23 44.77,100 100,100zm31.77,-27.82c34.29,0 62.08,-27.79 62.08,-62.08c0,-34.28 -27.79,-62.08 -62.08,-62.08c-34.28,0 -62.08,27.8 -62.08,62.08c0,34.29 27.8,62.08 62.08,62.08z" fill="#3b82f6" fill-rule="evenodd" id="svg_3"/>
+  </g>
+ </g>
 </svg>

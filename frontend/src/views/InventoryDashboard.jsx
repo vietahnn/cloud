@@ -6,11 +6,9 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useInventoryDashboard } from "../controllers/inventory.controller";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../contexts/ThemeContext";
 
 export default function InventoryDashboardPage() {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const filters = [
     { key: "today", value: t("inventory.filters_option_today") },
     { key: "yesterday", value: t("inventory.filters_option_yesterday") },
@@ -60,7 +58,7 @@ export default function InventoryDashboardPage() {
   } = data;
 
   return (
-    <Page>
+    <Page className="px-6 py-5">
       <div className="breadcrumbs text-sm mb-1">
         <ul>
           <li>
@@ -101,8 +99,8 @@ export default function InventoryDashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mt-6">
         {/* Top Moving Inventory Items */}
-        <div className='h-[calc(100vh-220px)] rounded-3xl border border-restro-border-green text-restro-text'>
-          <div className='pt-5 px-4 backdrop-blur sticky top-0 z-10 font-bold pb-1 bg-restro-bg-gray rounded-t-3xl'>
+        <div className='h-[calc(100vh-220px)] rounded-3xl border border-restro-border-green text-restro-text bg-restro-surface shadow-sm'>
+          <div className='pt-5 px-4 sticky top-0 z-10 font-bold pb-1 bg-restro-surface-muted rounded-t-3xl'>
             {t("inventory.cummulative_inventory_movements")}
           </div>
 
@@ -114,7 +112,7 @@ export default function InventoryDashboardPage() {
               return new String(item.title).trim().toLowerCase().includes(state.search.trim().toLowerCase());
             })?.length > 0 ? (
               <table className="table table-sm w-full text-xs lg:text-sm">
-                <thead className='px-4 sticky top-0 z-10 bg-restro-bg-gray'>
+                <thead className='px-4 sticky top-0 z-10 bg-restro-surface-muted'>
                   <tr>
                     <th>{t("inventory.table_header_number")}</th>
                     <th>{t("inventory.table_header_item")}</th>
