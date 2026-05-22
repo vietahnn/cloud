@@ -312,6 +312,107 @@ exports.getOrdersPaymentSummaryDB = async (orderIdsToFindSummary, tenantId) => {
 }
 };
 
+exports.getOrdersReceiptDetailsDB = async (orderIds, tenantId) => {
+  const conn = await getMySqlPromiseConnection();
+  try {
+    const orderIdsText = orderIds.join(",");
+
+    const sql = `
+    SELECT
+      o.id,
+      o.date,
+      o.delivery_type,
+      o.customer_type,
+      o.customer_id,
+      c. \`name\` AS customer_name,
+      c.email AS customer_email,
+      o.table_id,
+      st.table_title,
+      st. \`floor\`,
+      o.status,
+      o.payment_status,
+      o.token_no
+    FROM
+      orders o
+      LEFT JOIN customers c ON o.customer_id = c.phone AND c.tenant_id = o.tenant_id
+      LEFT JOIN store_tables st ON o.table_id = st.id
+    WHERE
+      o.id IN (${orderIdsText}) AND o.tenant_id = ?
+    `;
+
+    const [kitchenOrders] = await conn.query(sql, [tenantId]);
+
+    let kitchenOrdersItems = [];
+    let addons = [];
+
+    if (kitchenOrders.length > 0) {
+      const orderIdsList = kitchenOrders.map((o) => o.id).join(",");
+      const sql2 = `
+      SELECT
+        oi.id,
+        oi.order_id,
+        oi.item_id,
+        mi.title AS item_title,
+        oi.variant_id,
+        miv.title as variant_title,
+        miv.price as variant_price,
+        oi.price,
+        oi.quantity,
+        oi.status,
+        oi.date,
+        oi.addons,
+        oi.notes,
+        mi.tax_id,
+        t.title as tax_title,
+        t.rate as tax_rate,
+        t.type as tax_type
+      FROM
+        order_items oi
+        LEFT JOIN menu_items mi ON oi.item_id = mi.id
+        LEFT JOIN menu_item_variants miv ON oi.item_id = miv.item_id AND oi.variant_id = miv.id
+        LEFT JOIN taxes t ON mi.tax_id = t.id
+      WHERE oi.order_id IN (${orderIdsList}) AND oi.status NOT IN ('cancelled')
+      `;
+      const [kitchenOrdersItemsResult] = await conn.query(sql2);
+      kitchenOrdersItems = kitchenOrdersItemsResult;
+
+      const addonIds = [...new Set([...kitchenOrdersItems.flatMap((o) => (o.addons ? JSON.parse(o?.addons) : []))])].join(",");
+      const [addonsResult] = addonIds
+        ? await conn.query(`SELECT id, item_id, title, price FROM menu_item_addons WHERE id IN (${addonIds});`)
+        : [];
+      addons = addonsResult;
+    }
+
+    const formattedOrders = kitchenOrders.map((order) => {
+      const orderItems = kitchenOrdersItems.filter((oi) => oi.order_id == order.id);
+
+      orderItems.forEach((oi, index) => {
+        const addonsIds = oi?.addons ? JSON.parse(oi?.addons) : null;
+
+        if (addonsIds) {
+          const itemAddons = addonsIds.map((addonId) => {
+            const addon = addons.filter((a) => a.id == addonId);
+            return addon[0];
+          });
+          orderItems[index].addons = [...itemAddons];
+        }
+      });
+
+      return {
+        ...order,
+        items: orderItems,
+      };
+    });
+
+    return formattedOrders;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    conn.release();
+  }
+};
+
 exports.createInvoiceDB = async (subtotal, taxTotal, serviceChargeTotal, total, date, selectedPaymentType, tenantId) => {
   const conn = await getMySqlPromiseConnection();
   try {
