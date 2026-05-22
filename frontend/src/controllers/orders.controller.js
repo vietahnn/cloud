@@ -98,13 +98,15 @@ export async function payAndCompleteKitchenOrder(
     taxTotal,
     serviceChargeTotal,
     total,
-    selectedPaymentType
+    selectedPaymentType,
+    receiptEmail
 ) {
     try {
         const response = await ApiClient.post(`/orders/complete-and-pay-order`, {
             orderIds,
             subTotal, taxTotal, serviceChargeTotal, total,
-            selectedPaymentType
+            selectedPaymentType,
+            receiptEmail
         });
         return response;
     } catch (error) {

@@ -20,6 +20,7 @@ import POSMenuItemDetailedView from '../components/POSMenuItemDetailedView';
 import POSMenuItemCompactView from '../components/POSMenuItemCompactView';
 import { clsx } from "clsx";
 import { useTheme } from '../contexts/ThemeContext';
+import { validateEmail } from "../utils/emailValidator";
 
 export default function POSPage() {
   const { t } = useTranslation();
@@ -86,6 +87,7 @@ export default function POSPage() {
     selectedQrOrderItem: null,
 
     selectedPaymentType: null,
+    receiptEmail: "",
   });
 
   useEffect(()=>{
@@ -730,6 +732,11 @@ export default function POSPage() {
     if(!state.selectedPaymentType) {
       return toast.error(t('orders.select_payment_method'));
     }
+
+    const receiptEmail = state.receiptEmail?.trim();
+    if (receiptEmail && !validateEmail(receiptEmail)) {
+      return toast.error(t("customers.please_provide_valid_email"));
+    }
     try {
       const deliveryType = diningOptionRef.current.value;
       const tableId = tableRef.current.value;
@@ -737,7 +744,7 @@ export default function POSPage() {
       const customer = state.customer;
 
       toast.loading(t('pos.please_wait'));
-      const res = await createOrderAndInvoice(cartItems, deliveryType, customerType, customer, tableId, state.itemsTotal, state.taxTotal, state.serviceChargeTotal , state.payableTotal, state.selectedQrOrderItem, state.selectedPaymentType);
+      const res = await createOrderAndInvoice(cartItems, deliveryType, customerType, customer, tableId, state.itemsTotal, state.taxTotal, state.serviceChargeTotal , state.payableTotal, state.selectedQrOrderItem, state.selectedPaymentType, receiptEmail || null);
       toast.dismiss();
       if(res.status == 200) {
         const data = res.data;
@@ -782,6 +789,7 @@ export default function POSPage() {
           qrOrders: newQROrders,
           qrOrdersCount: newQROrderItemCount,
           selectedPaymentType: null,
+          receiptEmail: "",
         }))
 
         _initPOS()
@@ -1557,6 +1565,25 @@ export default function POSPage() {
                 {currency}{state.payableTotal.toFixed(2)}
               </p>
             </div>
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="receipt_email" className="mb-1 block text-gray-500 text-sm">
+              {t("customers.email")}
+            </label>
+            <input
+              id="receipt_email"
+              type="email"
+              value={state.receiptEmail}
+              onChange={(event) => {
+                setState({
+                  ...state,
+                  receiptEmail: event.target.value,
+                });
+              }}
+              className="text-sm w-full rounded-lg px-4 py-2 border border-restro-border-green bg-restro-gray dark:bg-black focus:outline-restro-border-green"
+              placeholder={t("customers.email_placeholder")}
+            />
           </div>
 
           <div

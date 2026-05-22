@@ -39,6 +39,7 @@ import QRCode from "qrcode"
 import { getQRMenuLink } from "../helpers/QRMenuHelper";
 import { useTheme } from "../contexts/ThemeContext";
 import clsx from "clsx";
+import { validateEmail } from "../utils/emailValidator";
 
 export default function OrdersPage() {
   const { t } = useTranslation();
@@ -72,6 +73,8 @@ export default function OrdersPage() {
     feedbackInvoiceId: null,
     feedbackCustomerId: null,
     feedbackQRCode: null,
+
+    receiptEmail: "",
   });
 
   useEffect(() => {
@@ -325,6 +328,11 @@ export default function OrdersPage() {
     if(!state.selectedPaymentType) {
       return toast.error(t('orders.select_payment_method'));
     }
+
+    const receiptEmail = state.receiptEmail?.trim();
+    if (receiptEmail && !validateEmail(receiptEmail)) {
+      return toast.error(t("customers.please_provide_valid_email"));
+    }
     try {
       toast.loading(t('orders.loading_message'));
       const res = await payAndCompleteKitchenOrder(
@@ -334,6 +342,7 @@ export default function OrdersPage() {
         state.summaryServiceChargeTotal,
         state.summaryTotal,
         state.selectedPaymentType,
+        receiptEmail || null,
       );
       toast.dismiss();
       if (res.status == 200) {
@@ -430,7 +439,8 @@ export default function OrdersPage() {
           selectedPaymentType: null,
           feedbackInvoiceId: invoiceId,
           feedbackCustomerId: customerId,
-          feedbackQRCode: qrDataURL
+          feedbackQRCode: qrDataURL,
+          receiptEmail: "",
         }));
         // Feedback
       }
@@ -1017,6 +1027,25 @@ export default function OrdersPage() {
               />{" "}
               {t('orders.print_receipt_option')}
             </label>
+
+            <div className="mt-4">
+              <label htmlFor="receipt_email" className="mb-1 block text-gray-500 text-sm">
+                {t("customers.email")}
+              </label>
+              <input
+                id="receipt_email"
+                type="email"
+                value={state.receiptEmail}
+                onChange={(event) => {
+                  setState({
+                    ...state,
+                    receiptEmail: event.target.value,
+                  });
+                }}
+                className="text-sm w-full rounded-lg px-4 py-2 border border-restro-border-green bg-restro-gray dark:bg-black focus:outline-restro-border-green"
+                placeholder={t("customers.email_placeholder")}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-3 gap-2">

@@ -13,7 +13,10 @@ const {
   getAllRecipeItemsDB,
 } = require("../services/menu_item.service");
 const { createOrderDB, getPOSQROrdersCountDB, getPOSQROrdersDB, updateQROrderStatusDB, cancelAllQROrdersDB } = require("../services/pos.service");
-const { createInvoiceDB } = require("../services/orders.service");
+const { createInvoiceDB, getOrdersReceiptDetailsDB } = require("../services/orders.service");
+const { mailTransport } = require("../config/mailTransport");
+const { isValidEmail } = require("../utils/emailValidator");
+const { buildReceiptEmailHtml, buildReceiptEmailSubject } = require("../utils/receiptEmail");
 
 exports.getPOSInitData = async (req, res) => {
   try {
@@ -141,12 +144,19 @@ exports.createOrderAndInvoice = async (req, res) => {
   try {
     const tenantId = req.user.tenant_id;
     const username = req.user.username;
-    const {cart, deliveryType, customerType, customerId, tableId, netTotal, taxTotal, serviceChargeTotal, total, selectedQrOrderItem, selectedPaymentType} = req.body;
+    const {cart, deliveryType, customerType, customerId, tableId, netTotal, taxTotal, serviceChargeTotal, total, selectedQrOrderItem, selectedPaymentType, receiptEmail} = req.body;
 
     if(cart?.length == 0) {
       return res.status(400).json({
         success: false,
         message: req.__("cart_is_empty") // Translate message
+      });
+    }
+
+    if (receiptEmail && !isValidEmail(receiptEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: req.__("invalid_request")
       });
     }
 
@@ -185,12 +195,55 @@ exports.createOrderAndInvoice = async (req, res) => {
       await updateQROrderStatusDB(tenantId, selectedQrOrderItem, "completed");
     }
 
+    let emailSent = false;
+    try {
+      const receiptOrders = await getOrdersReceiptDetailsDB([orderId], tenantId);
+      let emailTarget = receiptEmail;
+
+      if (!emailTarget) {
+        emailTarget = receiptOrders.find((order) => order.customer_email)?.customer_email || null;
+      }
+
+      if (emailTarget && isValidEmail(emailTarget)) {
+        const [storeSettings, paymentTypes] = await Promise.all([
+          getStoreSettingDB(tenantId),
+          getPaymentTypesDB(false, tenantId),
+        ]);
+
+        const paymentType = paymentTypes.find((type) => type.id == selectedPaymentType);
+
+        const html = buildReceiptEmailHtml({
+          storeSettings,
+          orders: receiptOrders,
+          totals: {
+            subTotal: netTotal,
+            taxTotal,
+            serviceChargeTotal,
+            total,
+          },
+          paymentMethod: paymentType?.title,
+          invoiceId,
+        });
+
+        await mailTransport({
+          to: emailTarget,
+          subject: buildReceiptEmailSubject(storeSettings),
+          html,
+        });
+
+        emailSent = true;
+      }
+    } catch (error) {
+      console.error("Failed to send receipt email", error);
+    }
+
     return res.status(200).json({
       success: true,
       message: req.__("order_created_token", { token: tokenNo }), // Translate message
       tokenNo,
       orderId,
-      invoiceId
+      invoiceId,
+      emailSent,
     });
 
   } catch (error) {
