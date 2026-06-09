@@ -56,7 +56,7 @@ export default function AppBar() {
 
   const user = getUserDetailsInLocalStorage();
   const { role: userRole, scope } = user;
-  const userScopes = scope?.split(",");
+  const userScopes = scope ? scope.split(",") : [];
 
   const btnLogout = async () => {
     try {

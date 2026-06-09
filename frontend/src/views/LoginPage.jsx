@@ -32,7 +32,7 @@ export default function LoginPage() {
         });
         return;
       }
-      const userScopes = scope.split(",");
+      const userScopes = scope ? scope.split(",") : [];
       if (userScopes.includes(SCOPES.DASHBOARD)) {
         navigate("/dashboard/home", {
           replace: true,
@@ -83,7 +83,7 @@ export default function LoginPage() {
           });
           return;
         }
-        const userScopes = scope.split(",");
+        const userScopes = scope ? scope.split(",") : [];
         if (userScopes.includes(SCOPES.DASHBOARD)) {
           navigate("/dashboard/home", {
             replace: true,
