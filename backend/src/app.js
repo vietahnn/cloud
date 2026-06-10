@@ -3,7 +3,7 @@ require("dotenv").config({});
 const express = require("express");
 const i18n = require('i18n');
 const morgan = require("morgan");
-const {rateLimit} = require("express-rate-limit");
+const { rateLimit } = require("express-rate-limit");
 const cors = require("cors");
 // const path = require("path")
 // const rfs = require("rotating-file-stream");
@@ -70,7 +70,7 @@ var corsOptions = {
 
 i18n.configure({
   locales: LANGUAGES,
-  directory: path.join(__dirname, '../translations' , 'locales'),
+  directory: path.join(__dirname, '../translations', 'locales'),
   defaultLocale: 'en',
   cookie: 'lang',
   queryParameter: 'lang',
@@ -114,9 +114,18 @@ app.use("/api/v1/qrmenu", qrMenuRoutes);
 app.use("/api/v1/feedback", feedbackRoutes);
 app.use("/api/v1/superadmin", superAdminRoutes);
 app.use("/api/v1/inventory", inventoryRoutes);
+// Serve static files từ thư mục client
+app.use(express.static(path.join(__dirname, "../client/dist")));
+// Route dự phòng (fallback) cho React SPA routing
+app.get("*", (req, res) => {
+  if (req.originalUrl.startsWith("/api/v1")) {
+    return res.status(404).json({ success: false, message: "API endpoint not found" });
+  }
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 // routes
 
-app.get("/", (req, res)=>{
+app.get("/", (req, res) => {
   res.send("⚡️");
 });
 
