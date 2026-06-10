@@ -11,8 +11,8 @@ VALUES ('super@test.com', '$2b$10$I/T244iuCBsKDUNMuV52Qu56KARzjeTmHqi8N4dEDjEBjI
 -- Tạo tài khoản Quản lý & Nhân viên
 -- Mật khẩu cho admin là "admin" | Mật khẩu cho manager là "manager"
 INSERT INTO users (username, password, name, role, designation, phone, email, tenant_id) VALUES
-('admin', '$2b$10$I/T244iuCBsKDUNMuV52Qu56KARzjeTmHqi8N4dEDjEBjIkR/TG.e', 'Chủ nhà hàng (Admin)', 'admin', 'Manager', '0123456789', 'admin@test.com', 100),
-('manager', '$2b$10$jzF1hxpw78xA3BiVQIcuhOw08b/an0Q0AsW2fG2OjX4FcgiV4bVFW', 'Nhân viên (Manager)', 'user', 'Staff', '0123456780', 'manager@test.com', 100);
+('admin@test.com', '$2b$10$I/T244iuCBsKDUNMuV52Qu56KARzjeTmHqi8N4dEDjEBjIkR/TG.e', 'Chủ nhà hàng (Admin)', 'admin', 'Manager', '0123456789', 'admin@test.com', 100),
+('manager@test.com', '$2b$10$jzF1hxpw78xA3BiVQIcuhOw08b/an0Q0AsW2fG2OjX4FcgiV4bVFW', 'Nhân viên (Manager)', 'user', 'Staff', '0123456780', 'manager@test.com', 100);
 
 -- Cấu hình thông tin cửa hàng
 INSERT INTO store_details (store_name, address, phone, email, currency, tenant_id, is_qr_menu_enabled) 

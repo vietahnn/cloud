@@ -102,6 +102,7 @@ CREATE TABLE `invoices` (
   `total` decimal(10,2) DEFAULT NULL,
   `payment_type_id` int DEFAULT NULL,
   `tenant_id` int NOT NULL,
+  `service_charge_total` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`,`tenant_id`),
   KEY `tenant_id` (`tenant_id`),
   CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

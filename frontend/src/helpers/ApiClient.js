@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API } from "../config/config";
 import Cookie from "js-cookie";
-import { getUserDetailsInLocalStorage } from "./UserDetails";
+import { getUserDetailsInLocalStorage, clearUserDetailsInLocalStorage } from "./UserDetails";
 import { getLanguage } from "./LocalizationHelper";
 
 const apiClient = axios.create({
@@ -46,6 +46,7 @@ apiClient.interceptors.response.use(
 
       if(retryCounter > 3) {
         Cookie.remove("restroprosaas__authenticated");
+        clearUserDetailsInLocalStorage();
         if(role == "superadmin") {
           window.location.href = "/superadmin";
         } else {
@@ -77,6 +78,8 @@ apiClient.interceptors.response.use(
       } catch (error) {
         // Handle refresh token error (e.g., redirect to login)
         console.error(error);
+        Cookie.remove("restroprosaas__authenticated");
+        clearUserDetailsInLocalStorage();
         if(role == "superadmin") {
           window.location.href = "/superadmin";
         } else {

@@ -3,6 +3,7 @@ const { addMenuItemDB, updateMenuItemDB, deleteMenuItemDB, addMenuItemAddonDB, u
 const path = require("path")
 const fs = require("fs");
 const { getInventoryItemsDB } = require("../services/inventory.service");
+const { uploadFile, deleteFile } = require("../utils/storage");
 
 exports.addMenuItem = async (req, res) => {
     try {
@@ -67,15 +68,8 @@ exports.uploadMenuItemPhoto = async (req, res) => {
 
         const file = req.files.image;
 
-        const imagePath = path.join(__dirname, `../../public/${tenantId}/`) + id;
+        const imageURL = await uploadFile(file, tenantId, id);
 
-        if(!fs.existsSync(path.join(__dirname, `../../public/${tenantId}/`))) {
-            fs.mkdirSync(path.join(__dirname, `../../public/${tenantId}/`));
-        }
-
-        const imageURL = `/public/${tenantId}/${id}`;
-
-        await file.mv(imagePath);
         await updateMenuItemImageDB(id, imageURL, tenantId);
 
         return res.status(200).json({
@@ -96,9 +90,8 @@ exports.removeMenuItemPhoto = async (req, res) => {
     try {
         const tenantId = req.user.tenant_id;
         const id = req.params.id;
-        const imagePath = path.join(__dirname, `../../public/${tenantId}/`) + id;
 
-        fs.unlinkSync(imagePath)
+        await deleteFile(id, tenantId);
 
         await updateMenuItemImageDB(id, null, tenantId);
 

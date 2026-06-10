@@ -2,6 +2,7 @@ const { nanoid } = require("nanoid");
 const { getStoreSettingDB, setStoreSettingDB, uploadStoreImageDB, deleteStoreImageDB, getPrintSettingDB, setPrintSettingDB, getTaxesDB, addTaxDB, updateTaxDB, deleteTaxDB, getTaxDB, addPaymentTypeDB, getPaymentTypesDB, updatePaymentTypeDB, deletePaymentTypeDB, togglePaymentTypeDB, addStoreTableDB, getStoreTablesDB, updateStoreTableDB, deleteStoreTableDB, addCategoryDB, getCategoriesDB, updateCategoryDB, deleteCategoryDB, getQRMenuCodeDB, updateQRMenuCodeDB, changeCategoryVisibiltyDB, updateServiceChargeDB, getServiceChargeDB } = require("../services/settings.service");
 const path = require("path");
 const fs = require("fs");
+const { uploadFile, deleteFile } = require("../utils/storage");
 
 exports.getStoreDetails = async (req, res) => {
     try {
@@ -76,15 +77,8 @@ exports.uploadStoreImage = async (req, res) => {
 
         const uniqueId = nanoid();
 
-        const imagePath = path.join(__dirname, `../../public/${tenantId}/`) + uniqueId;
+        const imageURL = await uploadFile(file, tenantId, uniqueId);
 
-        if(!fs.existsSync(path.join(__dirname, `../../public/${tenantId}/`))) {
-            fs.mkdirSync(path.join(__dirname, `../../public/${tenantId}/`));
-        }
-
-        const imageURL = `/public/${tenantId}/${uniqueId}`;
-
-        await file.mv(imagePath);
         await uploadStoreImageDB(imageURL, uniqueId, tenantId);
 
         return res.status(200).json({
@@ -113,9 +107,7 @@ exports.deleteStoreImage = async (req, res) => {
             })
         }
 
-        const imagePath = path.join(__dirname, `../../public/${tenantId}/`) + uniqueId;
-
-        fs.unlinkSync(imagePath)
+        await deleteFile(uniqueId, tenantId);
 
         await deleteStoreImageDB(null, uniqueId, tenantId);
 
