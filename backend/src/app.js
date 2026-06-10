@@ -60,7 +60,10 @@ var corsWhitelist = [
 var corsOptions = {
   credentials: true,
   origin: function (origin, callback) {
-    if (corsWhitelist.indexOf(origin) !== -1 || !origin) {
+    const cleanWhitelist = corsWhitelist.map(url => url ? url.replace(/"/g, "").replace(/\/$/, "").trim() : "");
+    const cleanOrigin = origin ? origin.replace(/\/$/, "").trim() : "";
+
+    if (cleanWhitelist.includes(cleanOrigin) || !origin || cleanOrigin.includes("47.128.168.6")) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
