@@ -33,7 +33,7 @@ export async function signUp(biz_name, username, password) {
 export async function signOut() {
     axios.defaults.withCredentials = true;
     try {
-        const response = await ApiClient.post(`${API}/auth/signout`);
+        const response = await ApiClient.post(`/auth/signout`);
 
         clearUserDetailsInLocalStorage();
 
@@ -72,7 +72,7 @@ export async function resetPassword(token, password) {
 export async function getStripeSubscriptionURL(productLookupKey) {
     axios.defaults.withCredentials = true;
     try {
-        const response = await ApiClient.post(`${API}/auth/stripe-product-lookup`, {
+        const response = await ApiClient.post(`/auth/stripe-product-lookup`, {
             id: productLookupKey
         });
         return response;
@@ -98,7 +98,7 @@ export function useSubscriptionDetails() {
 export async function cancelSubscription(subscriptionId) {
     axios.defaults.withCredentials = true;
     try {
-        const response = await ApiClient.post(`${API}/auth/cancel-subscription`, {
+        const response = await ApiClient.post(`/auth/cancel-subscription`, {
             id: subscriptionId
         });
         return response;

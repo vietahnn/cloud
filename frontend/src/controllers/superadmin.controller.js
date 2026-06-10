@@ -21,7 +21,7 @@ export async function signIn(username, password) {
 export async function signOut() {
   axios.defaults.withCredentials = true;
   try {
-    const response = await ApiClient.post(`${API}/superadmin/signout`);
+    const response = await ApiClient.post(`/superadmin/signout`);
 
     clearUserDetailsInLocalStorage();
 
@@ -66,7 +66,7 @@ export async function getSuperAdminTenantsData() {
 }
 export async function getTenantsData({page, perPage, search, status , type , from , to}) {
   try {
-    const response = await ApiClient.get(`${API}/superadmin/tenants?page=${page}&perPage=${perPage}&search=${search}&status=${status}&type=${type}&from=${from}&to=${to}`);
+    const response = await ApiClient.get(`/superadmin/tenants?page=${page}&perPage=${perPage}&search=${search}&status=${status}&type=${type}&from=${from}&to=${to}`);
     return response;
   } catch (error) {
     throw error;
@@ -75,7 +75,7 @@ export async function getTenantsData({page, perPage, search, status , type , fro
 
 export async function addTenant(name , email , password , isActive) {
   try {
-    const response = await ApiClient.post(`${API}/superadmin/tenants/add`, {
+    const response = await ApiClient.post(`/superadmin/tenants/add`, {
       name , email , password , isActive
     });
 
@@ -87,7 +87,7 @@ export async function addTenant(name , email , password , isActive) {
 
 export async function updateTenant(name , email , isActive , id) {
   try {
-    const response = await ApiClient.patch(`${API}/superadmin/tenants/update/${id}`, {
+    const response = await ApiClient.patch(`/superadmin/tenants/update/${id}`, {
       name , email , isActive
     });
         return response;
@@ -98,7 +98,7 @@ export async function updateTenant(name , email , isActive , id) {
 
 export async function deleteTenant(id) {
   try {
-    const response = await ApiClient.delete(`${API}/superadmin/tenants/delete/${id}`);
+    const response = await ApiClient.delete(`/superadmin/tenants/delete/${id}`);
 
     return response;
   } catch (error) {
@@ -108,7 +108,7 @@ export async function deleteTenant(id) {
 
 export async function getTenantsDataByStatus(status) {
   try {
-    const response = await ApiClient.get(`${API}/superadmin/tenantsData/${status}`);
+    const response = await ApiClient.get(`/superadmin/tenantsData/${status}`);
 
     return response;
   } catch (error) {
